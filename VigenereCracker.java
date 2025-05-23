@@ -41,4 +41,33 @@ public class VigenereCracker {
             return;
         }
     }
+    static class KeyResult {
+        String key;
+        double score;
+
+        KeyResult(String key, double score) {
+            this.key = key;
+            this.score = score;
+        }
+    }
+
+    private static KeyResult autoDetectKeyLength(String text, String alphabet, double[] langFreq, int maxKeyLen) {
+        double bestScore = Double.MAX_VALUE;
+        String bestKey = "";
+        for (int keyLen = 1; keyLen <= maxKeyLen; keyLen++) {
+            String key = findKeyByFrequency(text, keyLen, alphabet, langFreq);
+            double score = scoreDecryption(text, key, alphabet, langFreq);
+            if (score < bestScore) {
+                bestScore = score;
+                bestKey = key;
+            }
+        }
+        return new KeyResult(bestKey, bestScore);
+    }
+    private static String findKeyByFrequency(String text, int keyLen, String alphabet, double[] langFreq){
+        return null;
+    }
+    private static double scoreDecryption(String text, String key, String alphabet, double[] langFreq){
+        return 0;
+    }
 }
